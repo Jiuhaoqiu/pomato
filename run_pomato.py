@@ -5,12 +5,29 @@ sys.path.append(module_in_path)
 from pomato.market_tool import MarketTool
 
 
-if __name__ == "__main__":
+mato = MarketTool(opt_file="opt_setup.json")
+#mato.load_data_from_file('test_data/diw_demo.xlsx')
+mato.load_matpower_case('case118')
 
-    mato = MarketTool(opt_file="opt_setup.json")
-    mato.load_matpower_case('case118')
-    print(mato.data.nodes)
-    print("OK")
+print("OK")
+
+
+
+""" DEVLOG ROM
+- Standard data is loaded correctly and gridmodel is build
+- Next step: julia interface (should probably completey hidden)
+
+""""
+
+
+
+#if __name__ == "__main__":
+#
+#    mato = MarketTool(opt_file="opt_setup.json")
+#    mato.load_data_from_file('test_data/diw_demo.xlsx')
+#    print(mato.get_available_dataframes())
+#
+#    print("OK")
 
     # MT = MarketTool(wdir, "diw_demo.xlsx", "opt_setup.json", 2017,
     #                  6, model_horizon=range(101, 200))

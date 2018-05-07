@@ -1,6 +1,8 @@
 import logging
 import json
+import pandas as pd
 from pathlib import Path
+
 
 from . import MPCASES
 from .data_management import DataManagement
@@ -42,9 +44,18 @@ class MarketTool(object):
         self.logger.info("Market Tool Initialized")
 
         self.data = DataManagement()
+        self.grid = GridModel()
+        
+        ## TODO, [rom]
+        ## Not sure what does do, but all objectes should be initalized and 
+        ## then filled when needed
+         ## Core Attributes
+        self.market_model = None
+        self.bokeh_plot = None
+        # Hidden option
+        self._gams = False
 
-    
-    def load_data_from_file(self, filename, year=2017, co2_price=6):
+    def load_data_from_file(self, filename, year=2017, co2_price=6, autobuild_gridmodel=True):
         datafile = Path(filename)
         if datafile.is_file():
             self.data.read_xls_data(datafile, year, co2_price)
@@ -52,12 +63,15 @@ class MarketTool(object):
             # e.g. no empty init possible 
             # wait for richards major commit
             # self.grid = GridModel(self.data.nodes, self.data.lines) 
-            return True
+            if autobuild_gridmodel:
+                try: 
+                    self.grid.build_grid_model(self.data.nodes, self.data.lines)
+                except:
+                    self.looger.info("Grid Model has not been build")
         else:
             self.logger.exception("File {} can not be found!".format(filename))
-            return False
 
-    def load_matpower_case(self, casename):
+    def load_matpower_case(self, casename, autobuild_gridmodel=False):
         case = Path(casename)
         if case.is_file():
             self.data.read_matpower_case(case)
@@ -65,37 +79,26 @@ class MarketTool(object):
             case = Path('mp_casedata/{}.mat'.format(casename))
             self.data.read_matpower_case(case)
         else:
-            self.logger.exception("MP Case {} can not be found!".format(filename))
-
+            self.logger.exception("MP Case {} can not be found!".format(casename))
+            return
+        if autobuild_gridmodel:
+            try: 
+                self.grid.build_grid_model(self.data.nodes, self.data.lines)
+            except:
+                self.looger.info("Grid Model has not been build")
 
     def clear_data(self):
         self.logger.info("Resetting Data Object")
         self.data = DataManagement()
-
-
-    def legacy_init(self):
-        self.grid = grm.GridModel(self.data.nodes, self.data.lines)
-        with open(self.wdir.joinpath(opt_file)) as opt_file:
-            self.opt_setup = json.load(opt_file)
-        opt_str = "Optimization Options:" + json.dumps(self.opt_setup, indent=2) + "\n"
-        self.logger.info(opt_str)
-
-        self.model_horizon = model_horizon
-
-        ## Core Attributes
-        self.market_model = None
-        self.bokeh_plot = None
-        # Hidden option
-        self._gams = False
         
 
     def _parse_kwargs(self, kwargs):
         options = [
                     'opt_file'  # define location of a .json options file
                     ]
-        for o in options:
-            if not(o in kwargs.keys()):
-                self.logger.warn("Unknown keyword: {}".o)
+        for ka in kwargs.keys():
+            if not(ka in options):
+                self.logger.warn("Unknown keyword: {}".ka)
         
         if 'opt_file' in kwargs.keys():
             with open(self.wdir.joinpath(kwargs['opt_file'])) as ofile:

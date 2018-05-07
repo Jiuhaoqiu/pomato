@@ -2,7 +2,7 @@
 """
 GAMS CBCO Reduction Algorithm
 """
-import gams
+#import gams
 import numpy as np
 import datetime
 import json

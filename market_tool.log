@@ -531,3 +531,544 @@ NoneType: None
 
 05.05.2018 17:13 - Log.MarketModel - INFO - Market Tool Initialized
 05.05.2018 17:13 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 12:44 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 12:44 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 12:44 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 12:45 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 12:45 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 12:45 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 12:45 - Log.MarketModel - ERROR - MP Case case33bw can not be found!
+NoneType: None
+06.05.2018 13:06 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:06 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:06 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:06 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:06 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:06 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:07 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:07 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:07 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:08 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:08 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:08 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:08 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:08 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:08 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:08 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:08 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:08 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:09 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:09 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:09 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:10 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:10 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:10 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:17 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:17 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:17 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:18 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:18 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:18 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:19 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:19 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:19 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:19 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:19 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:19 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:36 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:36 - Log.MarketModel.DataManagement - INFO - Initializing DataSet..
+06.05.2018 13:49 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:49 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:49 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+06.05.2018 13:50 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:50 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:50 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+06.05.2018 13:50 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:50 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:50 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+06.05.2018 13:51 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+06.05.2018 13:51 - Log.MarketModel - INFO - Market Tool Initialized
+06.05.2018 13:51 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 10:29 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 10:29 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 10:29 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 10:32 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 10:32 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 10:32 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 10:32 - Log.MarketModel - ERROR - File data/diw_demo.xlsx can not be found!
+NoneType: None
+07.05.2018 10:32 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 10:32 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 10:32 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 10:32 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 10:32 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 10:32 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 10:32 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 10:32 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 10:48 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 10:48 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 10:48 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 10:48 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 10:48 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 10:48 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 10:48 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 10:48 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 10:48 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 10:48 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 10:48 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 10:48 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 10:48 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 10:48 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 10:48 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 10:48 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 10:50 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 10:50 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 10:50 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 10:50 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 10:50 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 10:50 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 10:50 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 10:50 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 10:52 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 10:52 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 10:52 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 10:52 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 10:52 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 10:52 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 10:52 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 10:52 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 10:56 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 10:56 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 10:56 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 10:56 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 10:56 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 10:56 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 10:56 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 10:56 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:02 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:02 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:02 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:02 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:02 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:02 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:02 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:02 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:22 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:22 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:22 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:22 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:22 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:22 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:22 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:22 - Log.MarketModel.DataManagement - ERROR - Error in DataSet!
+Traceback (most recent call last):
+  File "/Users/Balu/tubcloud/Market_Tool/pomato_repo/pomato/data_management.py", line 62, in read_xls_data
+    self.check_netinjections()
+AttributeError: 'DataManagement' object has no attribute 'check_netinjections'
+07.05.2018 11:22 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:22 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:22 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:22 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:22 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:22 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:22 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:22 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:23 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:23 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:23 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:23 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:23 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:23 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:23 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:23 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:23 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:24 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:24 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:24 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:24 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:24 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:24 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:24 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:24 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:24 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:24 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:24 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:31 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:31 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:31 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:31 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:32 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:32 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:32 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:32 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:32 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:32 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:32 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:32 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:33 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:33 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:33 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:33 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:33 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:33 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:33 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:33 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:33 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:33 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:33 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:33 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:34 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:34 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:34 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:34 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:34 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:34 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:34 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:34 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:34 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:34 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:34 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:34 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:34 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:34 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:34 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:34 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:51 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:51 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:51 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:54 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:54 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:54 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:54 - Log.MarketModel.GridModel - INFO - Initializing GridModel..
+07.05.2018 11:54 - Log.MarketModel.DataManagement - INFO - Reading Data from Excel File
+07.05.2018 11:54 - Log.MarketModel.DataManagement - INFO - Cleaning Names...
+07.05.2018 11:54 - Log.MarketModel.DataManagement - INFO - Checking Data...
+07.05.2018 11:54 - Log.MarketModel.DataManagement - WARNING - DataFrame plants contains NaN in column heatarea
+07.05.2018 11:54 - Log.MarketModel.DataManagement - INFO - DataSet initialized!
+07.05.2018 11:54 - Log.MarketModel.GridModel - INFO - Checking Grid Topology...
+07.05.2018 11:54 - Log.MarketModel.GridModel - INFO - Radial lines are part of the contingency: l239, l268
+07.05.2018 11:54 - Log.MarketModel.GridModel - INFO - Contingency of radial lines is set to False
+07.05.2018 11:54 - Log.MarketModel.GridModel - INFO - GridModel initialized!
+07.05.2018 11:54 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:54 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:54 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:54 - Log.MarketModel.GridModel - INFO - Initializing GridModel..
+07.05.2018 11:55 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:55 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:55 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:55 - Log.MarketModel.GridModel - INFO - Initializing GridModel..
+07.05.2018 11:55 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:55 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:55 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:55 - Log.MarketModel.GridModel - INFO - Initializing GridModel..
+07.05.2018 11:55 - Log.MarketModel.DataManagement - INFO - Reading MatPower Casefile
+07.05.2018 11:55 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:55 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:55 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:55 - Log.MarketModel.GridModel - INFO - Initializing GridModel..
+07.05.2018 11:55 - Log.MarketModel.DataManagement - INFO - Reading MatPower Casefile
+07.05.2018 11:57 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:57 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:57 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:57 - Log.MarketModel.GridModel - INFO - Initializing GridModel..
+07.05.2018 11:57 - Log.MarketModel.DataManagement - INFO - Reading MatPower Casefile
+07.05.2018 11:57 - Log.MarketModel.GridModel - ERROR - Error in GridModel!
+Traceback (most recent call last):
+  File "/Users/Balu/tubcloud/Market_Tool/pomato_repo/pomato/grid_model.py", line 25, in build_grid_model
+    self.mult_slack = bool(len(nodes.index[nodes.slack]) > 1)
+  File "/Users/Balu/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py", line 3614, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'slack'
+07.05.2018 11:58 - Log.MarketModel - INFO - Optimization Options:{
+  "opt": "cbco_nodal",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}
+
+07.05.2018 11:58 - Log.MarketModel - INFO - Market Tool Initialized
+07.05.2018 11:58 - Log.MarketModel.DataManagement - INFO - Initializing DataObject
+07.05.2018 11:58 - Log.MarketModel.GridModel - INFO - Initializing GridModel..
+07.05.2018 11:58 - Log.MarketModel.DataManagement - INFO - Reading MatPower Casefile

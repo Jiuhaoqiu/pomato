@@ -13,7 +13,7 @@ class DataManagement(object):
     def __init__(self):
             # import logger
             self.logger = logging.getLogger('Log.MarketModel.DataManagement')
-            self.logger.info("Initializing DataSet..")
+            self.logger.info("Initializing DataObject")
             
             # init as empty
             self.is_empty = True
@@ -46,6 +46,8 @@ class DataManagement(object):
             self.year = year
             self.co2_price = co2_price
 
+            ## TODO: Everything below here should be a new function so that "raw data"
+            ##       and data that has been checked / altered can be differentiated
             ## Calculate Missing Values
             self._clean_names()
             self.efficiency()
@@ -55,9 +57,9 @@ class DataManagement(object):
             self.line_susceptance()
             ## Check for NaNs
             self.unique_mc()
-            self.check_data()
+            self._check_data()
 
-            self.check_netinjections()
+            self._check_netinjections()
 
             self.is_empty = False
             self.source = 'xls_data'
@@ -67,6 +69,7 @@ class DataManagement(object):
             raise NameError("Error in DataSet!", sys.exc_info()[0])
 
     def read_matpower_case(self, casefile):
+        self.logger.info("Reading MatPower Casefile")
         self._clear_all_data()
         case_raw = sio.loadmat(casefile)
         mpc = case_raw['mpc']
@@ -87,12 +90,6 @@ class DataManagement(object):
         gen_df = pd.DataFrame(gen, columns=MPCOLNAMES['gen_keys'])
         branch_df = pd.DataFrame(branch, columns=MPCOLNAMES['branch_keys'])
         gencost_df = pd.DataFrame(gencost, columns=MPCOLNAMES['gencost_keys'])
-        if busname.any():
-            b_name = []
-            for b in busname:
-                b_name.append(b[0])
-            b_name = np.array(b_name)
-            bus_df['name'] = b_name
         caseinfo = docstring[0]
 
         mpc_buses = {
@@ -102,6 +99,12 @@ class DataManagement(object):
                 'Qd': bus_df['Qd'],
                 'baseKV': bus_df['baseKV']
                 }
+        if busname.any():
+            b_name = []
+            for b in busname:
+                b_name.append(b[0][0])
+            b_name = np.array(b_name)
+            mpc_buses['name'] = b_name
 
         lineidx = ['l{}'.format(i) for i in range(0,len(branch_df.index))]
         mpc_lines = {
@@ -116,7 +119,7 @@ class DataManagement(object):
         mpc_lines = self._mpc_data_pu_to_real(mpc_lines, mpc_buses['baseKV'][0], baseMVA[0][0])
 
         ng = len(gen_df.index)
-        genidx = ['g{}'.format(i) for i in range(0,ng)]
+        genidx = ['g{}'.format(i) for i in range(ng)]
         print(type(gencost_df['x2']))
         mpc_generators = {
                     'idx': genidx, 
@@ -128,7 +131,7 @@ class DataManagement(object):
                     'mc_Q': np.zeros(ng)
                     }
         if len(gencost_df.index) == 2*ng:
-            mpc_generators['mc_Q'] = gencost_df['x2'][list(range(ng+1,2*ng))]
+            mpc_generators['mc_Q'] = gencost_df['x2'][list(range(ng,2*ng))].tolist
 
         self.lines = pd.DataFrame(mpc_lines)
         self.lines.set_index('idx')
@@ -150,7 +153,6 @@ class DataManagement(object):
         lines['b'] = np.divide(lines['b'], z_base)
         return lines
 
-
     def _clear_all_data(self):
         attr = list(self.__dict__.keys())
         attr.remove('logger')
@@ -170,26 +172,31 @@ class DataManagement(object):
                      "å": "a", "Å": "A", "-": "_", "/": "_"}
 
         # Replace in index of the DataFrame
-        for i in char_dict:
-            self.plants.index = self.plants.index.str.replace(i, char_dict[i])
-            self.nodes.index = self.nodes.index.str.replace(i, char_dict[i])
-            self.lines.index = self.lines.index.str.replace(i, char_dict[i])
-            self.heatareas.index = self.heatareas.index.str.replace(i, char_dict[i])
-        # replace in the dataframe
-        self.plants.heatarea.replace(char_dict, regex=True, inplace=True)
-#        self.nodes.replace(char_dict, regex=True, inplace=True)
-#        self.lines.replace(char_dict, regex=True, inplace=True)
+        to_check = ['plants', 'nodes', 'lines', 'heatareas']
+        for attr in to_check:
+            if attr in list(self.__dict__.keys()):
+                for i in char_dict:
+                    self.__dict__[attr].index = self.__dict__[attr].index.str.replace(i, char_dict[i])
 
-    def check_netinjections(self):
+        # replace in the dataframe
+        try:
+            self.plants.heatarea.replace(char_dict, regex=True, inplace=True)
+            # self.nodes.replace(char_dict, regex=True, inplace=True)
+            # self.lines.replace(char_dict, regex=True, inplace=True)
+        except:
+            pass
+
+
+    def _check_netinjections(self):
         """make net injections if there are imported ones, warning"""
         if not self.nodes[self.nodes.net_injection != 0].empty:
             self.nodes.net_injection = 0
             self.logger.warning("Reset Net Injections to zero!")
 
-    def check_data(self):
+    def _check_data(self):
         """ checks if dataset contaisn NaNs"""
         self.logger.info("Checking Data...")
-        ## Heatarea contains NaN, but thats alright
+        ## Heatarea contains NaN, but that's alright
         data = vars(self)
         data_nan = {}
         for i, df_name in enumerate(data):
@@ -217,7 +224,7 @@ class DataManagement(object):
         self.plants.eta[self.plants.eta.isnull()] = 0.5
 
     def marginal_costs(self):
-        """Calculate the marginal costs for plants that dont have it maunually set"""
+        """Calculate the marginal costs for plants that don't have it manually set"""
         fuelmix_cost_dict = {}
         for flmx in self.fuelmix.index:
             fuelmix_cost_dict[flmx] = 0

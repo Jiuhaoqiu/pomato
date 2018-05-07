@@ -5,22 +5,21 @@ import sys
 import logging
 import numpy as np
 import pandas as pd
-from scipy.spatial import ConvexHull
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
-
 import tools as tools
-# import gams_cbco_reduction as cbco_reduction
+
+from .cbco_module import CBCOModule
 
 class GridModel(object):
     """GRID Model Class"""
     numpy_settings = np.seterr(divide="raise")
-    def __init__(self, nodes, lines):
+    def __init__(self):
+        self.logger = logging.getLogger('Log.MarketModel.GridModel')
+        self.logger.info("Initializing GridModel..")
+        self.is_empty = True
+            
+    def build_grid_model(self, nodes, lines):
         try:
             # import logger
-            self.logger = logging.getLogger('Log.MarketModel.GridModel')
-            self.logger.info("Initializing GridModel..")
-
             self.nodes = nodes
             self.lines = lines
             self.mult_slack = bool(len(nodes.index[nodes.slack]) > 1)
@@ -34,10 +33,11 @@ class GridModel(object):
             self.cbco_index = None
             self.add_cbco = None
             self._cbco_option = "convex_hull" ## or gams
+            self.is_empty = False
             self.logger.info("GridModel initialized!")
         except:
             self.logger.exception("Error in GridModel!")
-
+        
     def __getstate__(self):
         """
         Method to remove logger attribute from __dict__
@@ -174,13 +174,19 @@ class GridModel(object):
         grid_rep["option"] = option
         grid_rep["mult_slacks"] = self.mult_slack
         grid_rep["slack_zones"] = self.slack_zones()
-
         if option == "nodal":
-            grid_rep["ptdf"] = self.ptdf
+            ptdf_dict = {}
+            for idx, line in enumerate(self.lines.index):
+                ptdf_dict[line + "_pos"] = {"ptdf": list(self.ptdf[idx,:]), "ram": self.lines.maxflow[line]}
+                ptdf_dict[line + "_neg"] = {"ptdf": list(-self.ptdf[idx,:]), "ram": self.lines.maxflow[line]}
+            grid_rep["cbco"] = ptdf_dict
         elif option == "ntc":
             grid_rep["ntc"] = ntc
         elif "cbco" in option.split("_"):
-            info, cbco = self.return_cbco(option.split("_")[1])
+            from pathlib import Path
+            A,b = self.contingency_Ab("nodal", self.n_1_ptdf)
+            cbco = CBCOModule(Path.cwd(), self.nodes, self.lines, A, b)
+            info, cbco = cbco.main(use_precalc=False, only_convex_hull=False)
             grid_rep["info"] = info
             grid_rep["cbco"] = cbco
         return grid_rep
@@ -447,96 +453,22 @@ class GridModel(object):
         else:
             return ram_dict
 
-    def reduce_ptdf_gams(self, A, b):
-        """ Equiv to reduce_ptdf but using gams algorithm"""
-        from pathlib import Path
-        #add slack to cbco calc sum INJ = 0 for all slack zones
-        slack_zones_idx = self.slack_zones_index()
-        slack_cbco = []
-        for nodes_idx in slack_zones_idx:
-            add = np.zeros(len(self.nodes))
-            add[nodes_idx] = 1
-            add = add.reshape(1, len(self.nodes))
-            A = np.concatenate((A, add), axis=0)
-            b = np.append(b, [0.00001])
-            b = b.reshape(len(b), 1)
-            slack_cbco.append(len(b)-1)
-        cbco = cbco_reduction.LPReduction(Path.cwd(), A, b)
-        cbco.algorithm()
-        cbco_rows = cbco.cbco_rows
-        for index in slack_cbco:
-            if index in cbco_rows:
-                cbco_rows.remove(index)
-        return np.array(cbco_rows)
-
     def slack_zones_index(self):
         """returns the indecies of nodes per slack_zones
         (aka control area/synchronious area) in the A matrix"""
         slack_zones = self.slack_zones()
         slack_zones_idx = []
-#        for slack in slack_zones:
-#            slack_zones_idx.append([self.nodes.index.get_loc(node) \
-#                                    for node in slack_zones[slack]])
-#        slack_zones_idx.append([x for x in range(0, len(self.nodes))])
+        for slack in slack_zones:
+            slack_zones_idx.append([self.nodes.index.get_loc(node) \
+                                    for node in slack_zones[slack]])
+        slack_zones_idx.append([x for x in range(0, len(self.nodes))])
         return slack_zones_idx
 
-    def reduce_ptdf(self, A, b):
-        """
-        Given an system Ax = b, where A is a list of ptdf and b the corresponding ram
-        Reduce will find the set of ptdf equations which constrain the solution domain
-        (which are based on the N-1 ptdfs)
-        """
-        try:
-#            self = MT.grid
-            A = np.array(A)
-            b = np.array(b).reshape(len(b), 1)
-            D = A/b
-            if len(A[0]) > 4:
-                model = PCA(n_components=6).fit(D)
-                D_t = model.transform(D)
-                k = ConvexHull(D_t, qhull_options="QJ")
-            else:
-                k = ConvexHull(D) #, qhull_options = "QJ")
-
-#            slack_zones_idx = self.slack_zones_index()
-#            slack_cbco = []
-#            for nodes_idx in slack_zones_idx:
-#                add = np.zeros(len(self.nodes))
-#                add[nodes_idx] = 1
-#                add = add.reshape(1, len(self.nodes))
-#                A = np.concatenate((A, add), axis=0)
-#                b = np.append(b, [0.00001])
-#                b = b.reshape(len(b), 1)
-#                slack_cbco.append(len(b)-1)
-
-#            D = A/b
-#            if len(A[0]) > 4:
-#                model = PCA(n_components=7).fit(D)
-#                D_t = model.transform(D)
-#                s = ConvexHull(D_t, qhull_options="QJ")
-#            else:
-#                s = ConvexHull(D) #, qhull_options = "QJ")
-#
-#            cbco_rows = list(s.vertices)
-#            for index in slack_cbco:
-#                if index in cbco_rows:
-#                    cbco_rows.remove(index)
-#
-#            print(len(k.vertices), len(cbco_rows))
-#            cbco_rows = list(set(cbco_rows + list(k.vertices)))
-#            print(len(cbco_rows))
-
-            return k.vertices #np.array(cbco_rows)
-        except:
-            self.logger.exception('error:reduce_ptdf')
-
-    def contingency_Ab(self, option, contingency):
+    def contingency_Ab(self, option, contingency=None):
         """ Bring the N-1 PTDF list in the form of inequalities A x leq b
             where A are the ptdfs, b the ram and x the net injections
             returns lists
         """
-#        contingency = None
-
         contingency = contingency or self.n_1_ptdf
         if option == 'zonal':
             zonal_contingency = self.create_zonal_ptdf(contingency)
@@ -563,60 +495,7 @@ class GridModel(object):
                 A += tmp_A.tolist()
                 b += tmp_b.tolist()
         return A, b
-
-    def return_cbco(self, option='zonal', contingency=None):
-        """
-        Creating Ax = b Based on the list of N-1 ptdfs and ram
-        Reduce it using convex hull to get Critical Branches CB
-        """
-        try:
-            A, b = self.contingency_Ab(option, contingency)
-            add_cbco = self.add_cbco or []
-            if not isinstance(self.cbco_index, np.ndarray):
-                if self._cbco_option == "gams":
-                    self.cbco_index = self.reduce_ptdf_gams(A, b)
-                else:
-                    self.cbco_index = self.reduce_ptdf(A, b)
-
-            additional_cb = []
-            for [line, out] in add_cbco:
-                additional_cb.append((self.lines.index.get_loc(out) + 1)*2*len(self.lines) + \
-                                     self.lines.index.get_loc(line))
-                additional_cb.append((self.lines.index.get_loc(out) + 1)*2*len(self.lines) + \
-                                     len(self.lines) + self.lines.index.get_loc(line))
-
-            self.cbco_index = list(set(list(self.cbco_index) + additional_cb))
-            self.logger.info("Number of manually added CBCOs: " \
-                  + str(len(set(additional_cb).intersection(set(list(self.cbco_index))))))
-            self.logger.info("Total number of CBCOs: " + str(len(self.cbco_index)))
-
-            info = {}
-            for n in self.cbco_index:
-                info[n] = self.return_cbco_from_index(n)
-
-            cbco = {}
-            for i in self.cbco_index: # range(0, len(b)): #
-                cbco['cbco'+ "{0:0>4}".format(i+1)] = {'ptdf': A[i], 'ram': b[i]}
-            return(info, cbco)
-        except:
-            self.logger.exception('e:cbco')
-
-    def return_cbco_from_index(self, index):
-        """translates cbco index from reduce method to cb-co from lines data"""
-        # Ordering: L+1 N-1 ptdfs, [N-0, N-1_l1, N-1_l2 .... N-1_lL]
-        # Each ptdf contains L*2 equations ptdf_1, ... , ptdf_N, ram
-        # 0-L constraints have positive ram, L+1 - 2*L Negative ram
-        pos_or_neg = {0: 'pos', 1: 'neg'}
-        if index/(len(self.lines)*2) < 1: # N-0 ptdf
-            info = {'Line': self.lines.index[int(index%(len(self.lines)))],
-                    '+/-':  pos_or_neg[int(index/len(self.lines))%2],
-                    'Outage': 'N-0'}
-        else: # N-1 ptdfs
-            info = {'Line': self.lines.index[int(index%(len(self.lines)))],
-                    '+/-':  pos_or_neg[int(index/len(self.lines))%2],
-                    'Outage': self.lines.index[int(index/(len(self.lines)*2))-1]}
-        return info
-
+    
     def create_eq_list_zptdf(self, list_zonal_ptdf,
                              domain_x=None, domain_y=None, gsk_sink=None):
         """
@@ -836,7 +715,7 @@ class GridModel(object):
         except:
             self.logger.exception('error:get_xy_hull')
 
-    def plot_fbmc(self, domain_x, domain_y, gsk_sink=None, save_as=""):
+    def plot_fbmc(self, domain_x, domain_y, gsk_sink=None):
         """
         Combines previous functions to actually plot the FBMC Domain with the
         hull
@@ -873,9 +752,6 @@ class GridModel(object):
             ax.plot(hull_x, hull_y, 'r--', linewidth=2)
             ax.set_title(title)
             ax.scatter(xcoord, ycoord)
-            if save_as != "":
-                filename = save_as
-                fig.savefig(filename, bbox_inches='tight') 
             fig.show()
         except:
             self.logger.exception('error:plot_fbmc', sys.exc_info()[0])
@@ -906,8 +782,9 @@ class GridModel(object):
             flow_n1 = self.n_1_flows(option="lines")
             flow_max_n1 = max(abs(flow_n1[line]))/self.lines.maxflow[line]
             line_loadings[time] = {"N-0": flow_n0, "N-1": flow_max_n1,
-                                   "N-1 + 20%": flow_n0_20, "N-1 + 40%": flow_n0_40,
-                                   "N-1 + 60%": flow_n0_60, "N-1 + 80%": flow_n0_80,
-                                   "N-1 + 100%": flow_n0_100}
+#                                   "N-1 + 20%": flow_n0_20, "N-1 + 40%": flow_n0_40,
+#                                   "N-1 + 60%": flow_n0_60, "N-1 + 80%": flow_n0_80,
+#                                   "N-1 + 100%": flow_n0_100
+                                   }
 
         return pd.DataFrame.from_dict(line_loadings, orient="index")
