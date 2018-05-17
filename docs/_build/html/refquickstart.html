@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>PoMaTo — Power Market Tool, Engineered for Economists &mdash; PoMaTo  documentation</title>
+  <title>Quick Start Guide &mdash; PoMaTo  documentation</title>
   
 
   
@@ -28,8 +28,7 @@
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Quick Start Guide" href="refquickstart.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -48,7 +47,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> PoMaTo
+            <a href="index.html" class="icon icon-home"> PoMaTo
           
 
           
@@ -78,11 +77,14 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="refquickstart.html">Quick Start Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="refmodel.html">The Model</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Quick Start Guide</a><ul>
+<li><a class="reference internal" href="#creating-intializing-a-mato-object">Creating Intializing a Mato Object</a></li>
 </ul>
-
+</li>
+</ul>
+</div>
             
           
         </div>
@@ -95,7 +97,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">PoMaTo</a>
+          <a href="index.html">PoMaTo</a>
         
       </nav>
 
@@ -124,15 +126,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>PoMaTo — Power Market Tool, Engineered for Economists</li>
+      <li>Quick Start Guide</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/refquickstart.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -145,53 +147,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pomato-power-market-tool-engineered-for-economists">
-<h1>PoMaTo — Power Market Tool, Engineered for Economists<a class="headerlink" href="#pomato-power-market-tool-engineered-for-economists" title="Permalink to this headline">¶</a></h1>
-<p>Pomato is a comprehensive tool made for the modern power market.</p>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt>Data</dt>
-<dd><ul class="first last">
-<li>Supports Excel Data</li>
-<li>Support MatPowerCase Data</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Grid</dt>
-<dd><ul class="first last">
-<li>Fast network representation with recalculated network constraints</li>
-<li>Including n-1 security constrained dispatch</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Various options for market representation</dt>
-<dd><ul class="first last">
-<li>Nodal or Zonal optimization</li>
-<li>Including Electricity-Heat Coupling</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<div class="section" id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="refquickstart.html">Quick Start Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="refquickstart.html#creating-intializing-a-mato-object">Creating Intializing a Mato Object</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="refmodel.html">The Model</a></li>
-</ul>
+  <div class="section" id="quick-start-guide">
+<h1>Quick Start Guide<a class="headerlink" href="#quick-start-guide" title="Permalink to this headline">¶</a></h1>
+<p>This quick start guide will introduce the main concepts and functions of Pomato.</p>
+<div class="section" id="creating-intializing-a-mato-object">
+<h2>Creating Intializing a Mato Object<a class="headerlink" href="#creating-intializing-a-mato-object" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>MarketTool()*</strong> object provides the general API of Pomato’s functionality.
+It is typically initalized as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pomato</span> <span class="k">import</span> <span class="n">MarketTool</span><span class="p">()</span>
+
+<span class="n">mato</span> <span class="o">=</span> <span class="n">MarketTool</span><span class="p">()</span>
+</pre></div>
 </div>
-<div class="section" id="citing-pomato">
-<h3>Citing Pomato<a class="headerlink" href="#citing-pomato" title="Permalink to this headline">¶</a></h3>
-<p>If you find Pomato useful in your work, we kindly request that you cite the following PAPER.</p>
-</div>
+<p>The <code class="docutils literal"><span class="pre">MarketTool</span></code> object can be initialized with a set of options.</p>
 </div>
 </div>
 
@@ -200,13 +168,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="refquickstart.html" class="btn btn-neutral float-right" title="Quick Start Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-    </div>
   
 
   <hr/>

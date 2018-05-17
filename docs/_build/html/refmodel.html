@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>PoMaTo — Power Market Tool, Engineered for Economists &mdash; PoMaTo  documentation</title>
+  <title>The Model &mdash; PoMaTo  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Quick Start Guide" href="refquickstart.html" /> 
+    <link rel="prev" title="Quick Start Guide" href="refquickstart.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -48,7 +48,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> PoMaTo
+            <a href="index.html" class="icon icon-home"> PoMaTo
           
 
           
@@ -78,9 +78,9 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="refquickstart.html">Quick Start Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="refmodel.html">The Model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Model</a></li>
 </ul>
 
             
@@ -95,7 +95,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">PoMaTo</a>
+          <a href="index.html">PoMaTo</a>
         
       </nav>
 
@@ -124,15 +124,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>PoMaTo — Power Market Tool, Engineered for Economists</li>
+      <li>The Model</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/refmodel.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -145,54 +145,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pomato-power-market-tool-engineered-for-economists">
-<h1>PoMaTo — Power Market Tool, Engineered for Economists<a class="headerlink" href="#pomato-power-market-tool-engineered-for-economists" title="Permalink to this headline">¶</a></h1>
-<p>Pomato is a comprehensive tool made for the modern power market.</p>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt>Data</dt>
-<dd><ul class="first last">
-<li>Supports Excel Data</li>
-<li>Support MatPowerCase Data</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Grid</dt>
-<dd><ul class="first last">
-<li>Fast network representation with recalculated network constraints</li>
-<li>Including n-1 security constrained dispatch</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Various options for market representation</dt>
-<dd><ul class="first last">
-<li>Nodal or Zonal optimization</li>
-<li>Including Electricity-Heat Coupling</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<div class="section" id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="refquickstart.html">Quick Start Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="refquickstart.html#creating-intializing-a-mato-object">Creating Intializing a Mato Object</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="refmodel.html">The Model</a></li>
-</ul>
-</div>
-<div class="section" id="citing-pomato">
-<h3>Citing Pomato<a class="headerlink" href="#citing-pomato" title="Permalink to this headline">¶</a></h3>
-<p>If you find Pomato useful in your work, we kindly request that you cite the following PAPER.</p>
-</div>
-</div>
+  <div class="section" id="the-model">
+<h1>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h1>
+<p>This chapter provides an overview on the model formulations used in pomatos optimization kernel.</p>
+<div class="math" id="equation-enerbal">
+<span class="eqno">(1)<a class="headerlink" href="#equation-enerbal" title="Permalink to this equation">¶</a></span>\[\begin{split}\sum_{{n}_{z}} d^{el}_{n,t} &amp;= \sum_{{co}_{z}} G_{co,t} - \sum_{{es}_{z}} D^{es}_{es,t} - \sum_{{ph}_{z}} D^{ph}_{ph,t} - \sum_{{d}_{z}} D^{d}_{d,t} \\
+&amp;+ \sum_{zz} (EX_{zz,z,t} - EX_{z,zz,t}) \quad \forall t \in \text{T}, \quad z \in \text{Z}\end{split}\]</div>
+<p>where <span class="math">\(z\)</span> is the index of zones in equation <a class="reference internal" href="#equation-enerbal">(1)</a>.</p>
 </div>
 
 
@@ -203,8 +162,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="refquickstart.html" class="btn btn-neutral float-right" title="Quick Start Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
+        <a href="refquickstart.html" class="btn btn-neutral" title="Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

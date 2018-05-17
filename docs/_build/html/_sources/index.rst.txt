@@ -1,20 +1,37 @@
-.. PoMaTo documentation master file, created by
-   sphinx-quickstart on Sat May  5 17:30:20 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
-Welcome to PoMaTo's documentation!
-==================================
+=======================================================
+PoMaTo --- Power Market Tool, Engineered for Economists
+=======================================================
+
+
+Pomato is a comprehensive tool made for the modern power market. 
+
+* Data
+    * Supports Excel Data
+    * Support MatPowerCase Data
+
+* Grid
+    * Fast network representation with recalculated network constraints
+    * Including n-1 security constrained dispatch
+
+* Various options for market representation
+    * Nodal or Zonal optimization
+    * Including Electricity-Heat Coupling
+
+
+Contents
+--------
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   
+   refquickstart.rst
+   refmodel.rst
 
 
 
-Indices and tables
-==================
+-------------
+Citing Pomato
+-------------
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+If you find Pomato useful in your work, we kindly request that you cite the following PAPER. 
