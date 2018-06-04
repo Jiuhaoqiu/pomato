@@ -1,0 +1,1 @@
+{"columns":["zone_i","zone_j","ntc"],"index":[0,1,2,3,4,5,6,7,8,9,10,11],"data":[["DK-West","DK-East",500],["DK-West","DE",500],["DK-West","SE",0],["DK-East","DK-West",500],["DK-East","DE",0],["DK-East","SE",500],["DE","DK-East",0],["DE","DK-West",500],["DE","SE",0],["SE","DK-East",500],["SE","DK-West",0],["SE","DE",0]]}

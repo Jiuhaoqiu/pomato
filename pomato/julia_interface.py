@@ -1,6 +1,13 @@
 """
     This is the Julia Interface. It Does:
     Read and save the relevant data into julia/data
+
+    Object Status:
+        - empty: initalized but no data loaded
+        - ready_to_solve: data loaded and files build in the respective folders
+        - solved: model with the current data has been solved succesfully and results-files
+                  have been saved in the Julia folder 
+        - solve_error: something went wrong while trying to run Julia
 """
 import logging
 import subprocess
@@ -12,6 +19,7 @@ class JuliaInterface(object):
     """ Class to interface the Julia model with the python Market and Grid Model"""
     def __init__(self, wdir, DATA, opt_setup, grid_representation, model_horizon):
         # Import Logger
+        self.status = 'empty'
         self.logger = logging.getLogger('Log.MarketModel.JuliaInterface')
         self.wdir = wdir
         self.jdir = wdir.joinpath("julia")
@@ -36,7 +44,10 @@ class JuliaInterface(object):
         self.data_to_csv()
         self.data_to_json()
 
+        self.status = 'ready_to_solve'
+
         self.results = {}
+
 
     def create_folders(self, wdir):
         """ create folders for bokeh interface"""
@@ -73,7 +84,7 @@ class JuliaInterface(object):
             ## Write Log file
             with open(self.wdir.joinpath('julia.log'), 'a') as log:
                 log.write(stderr.decode())
-            self.logger.info("julia.log saved!")
+            self.logger.info("julia.log saved!")\
 
         t_end = datetime.datetime.now()
         self.logger.info("End-Time: " + t_end.strftime("%H:%M:%S"))
@@ -119,6 +130,7 @@ class JuliaInterface(object):
                 data = json.load(jsonfile)
             self.results["COST"] = data["Objective Value"]
             self.check_for_infeas()
+            self.status = 'solved'
 
     def check_for_infeas(self):
         """
@@ -228,6 +240,8 @@ class JuliaInterface(object):
         price["marginal"] = -(price.EB_zonal + price.EB_nodal)
 
         return price[["t", "n", "z", "marginal"]]
+
+
     def return_results(self, symb):
         """interface method to allow access to results alalog to the gms class"""
         try:

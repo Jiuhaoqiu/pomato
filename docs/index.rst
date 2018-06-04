@@ -1,10 +1,12 @@
 
-=======================================================
-PoMaTo --- Power Market Tool, Engineered for Economists
-=======================================================
+==================================================================
+PoMaTo --- Power Market Tool, Engineered for Power Market Analysis
+==================================================================
 
 
-Pomato is a comprehensive tool made for the modern power market. 
+The idea of Pomato is to provide an easy to use tool that inhibits all the power system engineering that is necessary for comprehensive analyses of the modern power market. It is more flexible and powerful than studies in Excel but sets aside the unnecessary detail of engineering software like Integral or PowerFactory. 
+
+Pomato currently includes:
 
 * Data
     * Supports Excel Data
@@ -17,6 +19,11 @@ Pomato is a comprehensive tool made for the modern power market.
 * Various options for market representation
     * Nodal or Zonal optimization
     * Including Electricity-Heat Coupling
+
+* GUI 
+    * Powerful Interactive Plotting
+    * Possible Map-Layouts
+    * Soon to come: GUI based input data handling
 
 
 Contents

@@ -1,0 +1,6 @@
+{
+  "opt": "ntc",
+  "infeas_heat": true,
+  "infeas_el": true,
+  "infeas_lines": true
+}

@@ -7,6 +7,7 @@ from pathlib import Path
 from . import MPCASES
 from .data_management import DataManagement
 from .grid_model import GridModel
+from .julia_interface import JuliaInterface
 
 
 
@@ -87,6 +88,16 @@ class MarketTool(object):
             except:
                 self.looger.info("Grid Model has not been build")
 
+    def init_market_model(self):
+        """init market model"""
+        if not self._gams:
+            self.market_model = JuliaInterface(self.wdir, self.data, self.opt_setup,
+                                                     self.grid_representation, self.model_horizon)
+        # Currently not maintained
+        else:
+            self.market_model = gms.GamsModel(self.wdir, self.data, self.opt_setup,
+                                              self.grid_representation, self.model_horizon)
+
     def clear_data(self):
         self.logger.info("Resetting Data Object")
         self.data = DataManagement()
@@ -94,32 +105,27 @@ class MarketTool(object):
 
     def _parse_kwargs(self, kwargs):
         options = [
-                    'opt_file'  # define location of a .json options file
+                    'opt_file',  # define location of a .json options file
+                    'model_horizon' # restrict the amount of times that are solved
                     ]
         for ka in kwargs.keys():
             if not(ka in options):
-                self.logger.warn("Unknown keyword: {}".ka)
+                self.logger.warn("Unknown keyword: {}".format(ka))
         
         if 'opt_file' in kwargs.keys():
             with open(self.wdir.joinpath(kwargs['opt_file'])) as ofile:
                 self.opt_setup = json.load(ofile)
                 opt_str = "Optimization Options:" + json.dumps(self.opt_setup, indent=2) + "\n"
             self.logger.info(opt_str)
+        if 'model_horizon' in kwargs.keys():
+            self.model_horizon = kwargs['model_horizon']
 
     @property
     def grid_representation(self):
         """Grid Representation as property, get recalculated when accessed via dot"""
         return self.grid.grid_representation(self.opt_setup["opt"], self.data.ntc)
 
-    def init_market_model(self):
-        """init market model"""
-        if not self._gams:
-            self.market_model = julia.JuliaInterface(self.wdir, self.data, self.opt_setup,
-                                                     self.grid_representation, self.model_horizon)
-        else:
-            self.market_model = gms.GamsModel(self.wdir, self.data, self.opt_setup,
-                                              self.grid_representation, self.model_horizon)
-
+    
     def init_bokeh_plot(self, add_grid=True, name="default"):
         """init boke plot (saves market result and grid object)"""
         self.bokeh_plot = bokeh.BokehPlot(self.wdir, self.data)
