@@ -2,3 +2,4 @@
 *.log
 *DEV.*
 /julia/results
+/julia/data
