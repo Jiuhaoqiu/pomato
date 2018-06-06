@@ -4,3 +4,8 @@
 /julia/results
 /julia/data
 /julia/cbco_data
+/bokeh
+/pomato.*
+/dist
+/build
+*/__pycache__

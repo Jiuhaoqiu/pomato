@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Market Tool Object &mdash; POMATO 0.1.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Model and Theory" href="refmodel.html" />
+    <link rel="prev" title="Quick Start Guide" href="refquickstart.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> POMATO
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="refquickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Market Tool Object</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#grid-model-object">Grid Model Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plotting">Plotting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="refmodel.html">Model and Theory</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">POMATO</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>The Market Tool Object</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/refmato.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-market-tool-object">
+<h1>The Market Tool Object<a class="headerlink" href="#the-market-tool-object" title="Permalink to this headline">¶</a></h1>
+<p>This chapter provides an overview of the main functionality of the market tool object and its underlying classes and functions</p>
+<div class="section" id="grid-model-object">
+<h2>Grid Model Object<a class="headerlink" href="#grid-model-object" title="Permalink to this headline">¶</a></h2>
+<p><strong>Utility:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">save()</span></code>: Stores the full object, e.g to be used by plotting functions.</li>
+<li><code class="docutils literal"><span class="pre">check_grid_toplogy</span></code>: Checks grid topology for radial nodes and lines.</li>
+<li><code class="docutils literal"><span class="pre">slack_zones()</span></code>: Returns number of nodes that are part of a synchronous area for each slack defined.</li>
+<li><code class="docutils literal"><span class="pre">check_n_1_for_marketresult(injections,</span> <span class="pre">timeslice=None,</span> <span class="pre">threshold=3)</span></code>: Checks Market Result for N-1 Security. Optional timeslice as list of strings [t001, … , txxx]. Op- tional threshold for overloaded lines from which further check is canceled, injections dataframe from method gms.gams_symbol_to_df().</li>
+<li><code class="docutils literal"><span class="pre">update_gsk()</span></code>: Updates the GSK based on the GSK values in the nodes table. Returns the GSK12.</li>
+<li><code class="docutils literal"><span class="pre">update_ram(PTDF)</span></code>: Updates the RAM based on net injections and the resulting line-flows using the input PTDF. Returns RAM.</li>
+<li><code class="docutils literal"><span class="pre">update_flows()</span></code>: Updates the flows in lines.</li>
+</ul>
+</div></blockquote>
+<p><strong>Calculations:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">create_incedence_matrix()</span></code>: Creates incidence matrix</li>
+<li><code class="docutils literal"><span class="pre">create_node_line_susceptance_matrix()</span></code>: Creates node-susceptance matrix Bn and line-susceptance matrix Bl</li>
+<li><code class="docutils literal"><span class="pre">create_ptdf_matrix()</span></code>: Creates and returns PTDF matrix</li>
+<li><code class="docutils literal"><span class="pre">create_lodf_matrix()</span></code>: Creates and returns LODF matrix</li>
+<li><code class="docutils literal"><span class="pre">create_psdf_matrix()</span></code>: Creates and returns PSDF matrix (not yet implemented)</li>
+<li><code class="docutils literal"><span class="pre">create_n_1_pdtf()</span></code>: Creates and returns N-1 PTDF matrices (number of lines plus N-0 PTDF matrix)</li>
+<li><code class="docutils literal"><span class="pre">calc_flows()</span></code>: Calculates and returns flows with the N-0 PTDF</li>
+<li><code class="docutils literal"><span class="pre">n_1_flows()</span></code>: Calculates and returns all N-1 Flows in a dictionary. For each outage (=key) it contains the flows on all lines.</li>
+<li><code class="docutils literal"><span class="pre">check_n_0(Flow)</span></code>: Checks weather a flow (input) is viable in the N-0 grid</li>
+<li><code class="docutils literal"><span class="pre">check_n_1()</span></code>: Checks N-1 load flows based on the return from N_1_Flows(). Returns overloaded_lines and model_status to the class.</li>
+<li><code class="docutils literal"><span class="pre">reduce_ptdf(A,</span> <span class="pre">b)</span></code>: Based on a equations system in the form :math: <cite>Ax = b</cite> this methods find the equations which create the convex hull. This method is essential for the creation of the CBCOs and the Flow-Based Domain.</li>
+<li><code class="docutils literal"><span class="pre">create_zonal_ptdf(contingency)</span></code> Creates a list of zonal PTDFs based on the input contingency, which usually is the list of N-1 PTDFs. This method returns a list with all equations for both the lower limit and upper limit of the corresponding line. Because of related methods, the right hand side of all equations is positive.</li>
+</ul>
+</div></blockquote>
+<p><strong>Tools:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">return_cbco(contingency={},</span> <span class="pre">option='zonal',</span> <span class="pre">lines</span> <span class="pre">=</span> <span class="pre">[],</span> <span class="pre">outages</span> <span class="pre">=</span> <span class="pre">[])</span></code>: Creates CB- COs for a specified contingency. It is possible to generate zonal oder nodal CBCOs, however the implementation incorporates some math-fuzzyness, which is why it is possible to manually add specific CBCOs.</li>
+<li><code class="docutils literal"><span class="pre">create_eq_list_zonalptdf(list_zonal_PTDF,</span> <span class="pre">domain_x=[],</span> <span class="pre">domain_y=[],</span> <span class="pre">gsk_sink=[])</span></code> Creates a list of two dimensional PTDFs to allow plotting the trade domain for chosen zones and specified zones that act as sinks for excess capacity.</li>
+<li><code class="docutils literal"><span class="pre">get_xy_hull(contingency,</span> <span class="pre">domain_x,</span> <span class="pre">domain_y,</span> <span class="pre">gsk_sink={},</span> <span class="pre">external_zonal_ptdf=True)</span></code>: Based on the reduced zonal PTDF equations, this methods constructs the resulting convex hull based on the intersection of the relevant equations, returns the x and y coordinates.</li>
+<li><code class="docutils literal"><span class="pre">plot_domain(contingency,</span> <span class="pre">domain_x,</span> <span class="pre">domain_y,</span> <span class="pre">gsk_sink={},</span> <span class="pre">reduce=True,</span> <span class="pre">external_zonal_ptdf=False)</span></code>: Creates x and y coordinates for all (or the reduced set) of zonal PTDF equations from create_eq_list_zonalPTDF.</li>
+<li><code class="docutils literal"><span class="pre">plot_fbmc(domain_x,</span> <span class="pre">domain_y,</span> <span class="pre">gsk_sink={})</span></code>: Combines plot_domain and get_xy_hull to plot the resulting FBMC domain with everything anybody could want.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h2>
+<p>Needs <a class="reference external" href="https://bokeh.pydata.org/en/latest/">Bokeh</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="refmodel.html" class="btn btn-neutral float-right" title="Model and Theory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="refquickstart.html" class="btn btn-neutral" title="Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Robert Mieth, Richard Weinhold.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

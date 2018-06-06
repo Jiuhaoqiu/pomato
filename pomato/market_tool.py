@@ -1,13 +1,15 @@
 import logging
 import json
 import pandas as pd
+import subprocess
 from pathlib import Path
 
 
 from . import MPCASES
-from .data_management import DataManagement
-from .grid_model import GridModel
-from .julia_interface import JuliaInterface
+from pomato.data_management import DataManagement
+from pomato.grid_model import GridModel
+from pomato.julia_interface import JuliaInterface
+import pomato.bokeh_plot_interface as bokeh
 
 
 
@@ -98,6 +100,11 @@ class MarketTool(object):
             self.market_model = gms.GamsModel(self.wdir, self.data, self.opt_setup,
                                               self.grid_representation, self.model_horizon)
 
+    def run_market_model(self):
+        # Run the model
+        self.market_model.run()
+
+
     def clear_data(self):
         self.logger.info("Resetting Data Object")
         self.data = DataManagement()
@@ -119,6 +126,14 @@ class MarketTool(object):
             self.logger.info(opt_str)
         if 'model_horizon' in kwargs.keys():
             self.model_horizon = kwargs['model_horizon']
+
+
+    def plot_grid_object(self):
+        # TODO: Add all the add market data and grid data stuff to the API
+        self.init_bokeh_plot(name="plotmodel")
+        self.bokeh_plot.start_server()
+        # self.bokeh_plot.stop_server()
+
 
     @property
     def grid_representation(self):

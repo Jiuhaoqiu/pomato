@@ -1,13 +1,14 @@
 """
 GRID Model
 """
+
 import sys
 import logging
 import numpy as np
 import pandas as pd
-import tools as tools
+import pomato.tools as tools
 
-from .cbco_module import CBCOModule
+from pomato.cbco_module import CBCOModule
 
 class GridModel(object):
     """GRID Model Class"""
@@ -788,3 +789,4 @@ class GridModel(object):
                                    }
 
         return pd.DataFrame.from_dict(line_loadings, orient="index")
+

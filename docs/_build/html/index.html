@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>PoMaTo — Power Market Tool, Engineered for Economists &mdash; PoMaTo  documentation</title>
+  <title>POMATO — Power Market Tool, Engineered for Power Market Analysis &mdash; POMATO 0.1.1 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> PoMaTo
+            <a href="#" class="icon icon-home"> POMATO
           
 
           
@@ -56,6 +56,10 @@
 
           
             
+            
+              <div class="version">
+                0.1
+              </div>
             
           
 
@@ -80,7 +84,8 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="refquickstart.html">Quick Start Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="refmodel.html">The Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="refmato.html">The Market Tool Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="refmodel.html">Model and Theory</a></li>
 </ul>
 
             
@@ -95,7 +100,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">PoMaTo</a>
+          <a href="#">POMATO</a>
         
       </nav>
 
@@ -126,7 +131,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>PoMaTo — Power Market Tool, Engineered for Economists</li>
+      <li>POMATO — Power Market Tool, Engineered for Power Market Analysis</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -145,9 +150,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pomato-power-market-tool-engineered-for-economists">
-<h1>PoMaTo — Power Market Tool, Engineered for Economists<a class="headerlink" href="#pomato-power-market-tool-engineered-for-economists" title="Permalink to this headline">¶</a></h1>
-<p>Pomato is a comprehensive tool made for the modern power market.</p>
+  <div class="section" id="pomato-power-market-tool-engineered-for-power-market-analysis">
+<h1>POMATO — Power Market Tool, Engineered for Power Market Analysis<a class="headerlink" href="#pomato-power-market-tool-engineered-for-power-market-analysis" title="Permalink to this headline">¶</a></h1>
+<p>The idea of Pomato is to provide an easy to use tool that inhibits all the power system engineering that is necessary for comprehensive analyses of the modern power market. It is more flexible and powerful than studies in Excel but sets aside the unnecessary detail of engineering software like Integral or PowerFactory.</p>
+<p>Pomato currently includes:</p>
 <ul class="simple">
 <li><dl class="first docutils">
 <dt>Data</dt>
@@ -176,6 +182,16 @@
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>GUI</dt>
+<dd><ul class="first last">
+<li>Powerful Interactive Plotting</li>
+<li>Possible Map-Layouts</li>
+<li>Soon to come: GUI based input data handling</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 <div class="section" id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
@@ -183,10 +199,26 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="refquickstart.html">Quick Start Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="refquickstart.html#creating-intializing-a-mato-object">Creating Intializing a Mato Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refquickstart.html#the-option-file">The Option File</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="refmodel.html">The Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="refmato.html">The Market Tool Object</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="refmato.html#grid-model-object">Grid Model Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refmato.html#plotting">Plotting</a></li>
 </ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="refmodel.html">Model and Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="refmodel.html#power-flow">Power Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refmodel.html#n-1-outage-calculation">N-1 Outage Calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refmodel.html#phase-shifting-transformers">Phase Shifting Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refmodel.html#zonal-ptdf-and-gsk">Zonal PTDF and GSK</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<p>(Overview on Main Class, Data, Julia Kernel)</p>
 </div>
 <div class="section" id="citing-pomato">
 <h3>Citing Pomato<a class="headerlink" href="#citing-pomato" title="Permalink to this headline">¶</a></h3>
@@ -235,7 +267,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'',
+            VERSION:'0.1.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

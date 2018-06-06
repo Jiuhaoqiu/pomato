@@ -242,7 +242,7 @@ def create_line_source(GRID):
 (nodes, zones, plants, tech, fuelmix, dclines) = load_data_from_csv(wdir)
 
 # Init Data and Widgets
-option_market_db = os.listdir(wdir.joinpath("market_result"))
+option_market_db = [path for path in os.listdir(wdir.joinpath("market_result")) if "." not in path]
 select_market_db = Select(title="Model Run:", value=option_market_db[0], options=option_market_db)
 
 g_by_fuel, demand, inj, f_dc, t_first, t_last = init_market_result(select_market_db.value)
@@ -253,6 +253,7 @@ source_dc = ColumnDataSource(f_dc)
 source_inj = ColumnDataSource(inj)
 
 option_grid_db = available_files_by_ext(wdir.joinpath("gridfiles"), "file")
+# print(option_grid_db[0])
 select_grid_db = Select(title="Grid Topology:", value=option_grid_db[0], options=option_grid_db)
 
 GRID = init_grid_db(select_grid_db.value)
@@ -261,7 +262,7 @@ lines = GRID.lines
 #Init of source_grid, which will make it possible to change grid topology
 source_grid = ColumnDataSource(data={"grid":[GRID]})
 
-## Widgets and fucntion calls
+## Widgets and function calls
 slider = Slider(start=t_first, end=t_last, value=t_first, step=1, title="Timestep",
                 callback_throttle=250, callback_policy="throttle") # Throttle doesnt work as of now
 

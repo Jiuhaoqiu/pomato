@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quick Start Guide &mdash; PoMaTo  documentation</title>
+  <title>Quick Start Guide &mdash; POMATO 0.1.1 documentation</title>
   
 
   
@@ -28,7 +28,9 @@
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The Market Tool Object" href="refmato.html" />
+    <link rel="prev" title="POMATO — Power Market Tool, Engineered for Power Market Analysis" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -47,7 +49,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> PoMaTo
+            <a href="index.html" class="icon icon-home"> POMATO
           
 
           
@@ -55,6 +57,10 @@
 
           
             
+            
+              <div class="version">
+                0.1
+              </div>
             
           
 
@@ -77,14 +83,16 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Quick Start Guide</a><ul>
-<li><a class="reference internal" href="#creating-intializing-a-mato-object">Creating Intializing a Mato Object</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-intializing-a-mato-object">Creating Intializing a Mato Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-option-file">The Option File</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="refmato.html">The Market Tool Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="refmodel.html">Model and Theory</a></li>
 </ul>
-</div>
+
             
           
         </div>
@@ -97,7 +105,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">PoMaTo</a>
+          <a href="index.html">POMATO</a>
         
       </nav>
 
@@ -152,14 +160,81 @@
 <p>This quick start guide will introduce the main concepts and functions of Pomato.</p>
 <div class="section" id="creating-intializing-a-mato-object">
 <h2>Creating Intializing a Mato Object<a class="headerlink" href="#creating-intializing-a-mato-object" title="Permalink to this headline">¶</a></h2>
-<p>The <strong>MarketTool()*</strong> object provides the general API of Pomato’s functionality.
-It is typically initalized as:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pomato</span> <span class="k">import</span> <span class="n">MarketTool</span><span class="p">()</span>
+<p>The <strong>MarketTool()</strong> object provides the general API of Pomato’s functionality.
+It is typically initialized as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pomato.market_tool</span> <span class="k">import</span> <span class="n">MarketTool</span>
 
 <span class="n">mato</span> <span class="o">=</span> <span class="n">MarketTool</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">MarketTool</span></code> object can be initialized with a set of options.</p>
+<p>The <code class="docutils literal"><span class="pre">MarketTool</span></code> object can be initialized with the following keyword arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">opt_file</span> <span class="pre">=</span> <span class="pre">'path-to-optfile'</span></code> - references a option file in <code class="docutils literal"><span class="pre">.json</span></code> format. See below.</li>
+<li><code class="docutils literal"><span class="pre">model_horizon</span> <span class="pre">=</span> <span class="pre">rangeObject</span></code> - limits the calculation horizon of the model to a subset of the available timesteps</li>
+</ul>
+<p>Load data either from excel files:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mato</span><span class="o">.</span><span class="n">load_data_from_file</span><span class="p">(</span><span class="s1">&#39;test_data/diw_demo.xlsx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or <strong>MatPower</strong> cases:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mato</span><span class="o">.</span><span class="n">load_matpower_case</span><span class="p">(</span><span class="s1">&#39;case118&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To set-up and run the model use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mato</span><span class="o">.</span><span class="n">init_market_model</span><span class="p">()</span>
+<span class="n">mato</span><span class="o">.</span><span class="n">run_market_model</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(more options and features coming soon)</p>
+</div>
+<div class="section" id="the-option-file">
+<h2>The Option File<a class="headerlink" href="#the-option-file" title="Permalink to this headline">¶</a></h2>
+<p>The option file collects a set of keyword options in <code class="docutils literal"><span class="pre">.json</span></code> format to define the behavior of the model and the usage of the available data.</p>
+<p>For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;opt&quot;</span><span class="p">:</span> <span class="s2">&quot;ntc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;infeas_heat&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;infeas_el&quot;</span><span class="p">:</span> <span class="n">true</span>
+    <span class="s2">&quot;infeas_lines&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Keywords and their options:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">&quot;opt&quot;</span></code>:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal"><span class="pre">&quot;ntc&quot;</span></code> use net transfer capacity to solve the flows</li>
+<li><code class="docutils literal"><span class="pre">&quot;cbco&quot;</span></code> reduce line constraints to cbco matrix and solve security constrained dispatch</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">&quot;infeas_heat&quot;</span></code>:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal"><span class="pre">boolean</span></code>: Turn slack in heat energy-balances on or off</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">&quot;infeas_el&quot;</span></code>:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal"><span class="pre">boolean</span></code>: Turn slack in electricity energy-balances on or off</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">&quot;infeas_lines&quot;</span></code>:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal"><span class="pre">boolean</span></code>: Turn slack in flow energy-balances on or off</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 </div>
 
@@ -168,6 +243,15 @@ It is typically initalized as:</p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="refmato.html" class="btn btn-neutral float-right" title="The Market Tool Object" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="POMATO — Power Market Tool, Engineered for Power Market Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -196,7 +280,7 @@ It is typically initalized as:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'',
+            VERSION:'0.1.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

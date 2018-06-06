@@ -1,7 +1,7 @@
 """
 BOKEH Plot Interface -
 populate Bokeh instace data for multiple model runs
-start and stop bokeh ploit htrough threading
+start and stop bokeh plot through threading
 """
 
 import re
@@ -37,6 +37,7 @@ class BokehPlot(object):
         self.bokeh_server = None
         self.bokeh_thread = None
 
+
     def create_folders(self, wdir):
         """ create folders for bokeh interface"""
         if not wdir.joinpath("bokeh").is_dir():
@@ -58,6 +59,7 @@ class BokehPlot(object):
             pickle.dump(grid, file)
             
         self.logger.info("GRID object saved!")
+
 
     def add_market_result(self, market_result, name):
         """create data set for bokeh plot from gams or julia market_result-object """
@@ -141,7 +143,7 @@ class BokehPlot(object):
         
     def start_server(self):
         """Run the Bokeh server via command Line"""
-        args_list = ["bokeh", "serve", "--show", str(self.wdir.joinpath("bokeh_plot.py")), "--args",
+        args_list = ["bokeh", "serve", "--show", str(self.wdir.joinpath("pomato/bokeh_plot.py")), "--args",
                      str(self.bokeh_dir)]
         self.bokeh_server = subprocess.Popen(args_list,
                                              stdout=subprocess.PIPE,

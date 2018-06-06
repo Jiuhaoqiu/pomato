@@ -27,6 +27,23 @@ class CBCOModule(object):
         if add_cbco:
             self.add_to_cbco_index(self.return_index_from_cbco(add_cbco))
 
+    def __getstate__(self):
+        """
+        Method to remove logger attribute from __dict__
+        needed when pickeled
+        """
+        d = dict(self.__dict__)
+        del d["logger"]
+        return d
+
+    def __setstate__(self, d):
+        """
+        Method updates self with modified __dict__ without logger
+        needed when pickeled
+        """
+        self.__dict__.update(d) # I *think* this is a safe way to do it
+
+
     def main(self, use_precalc=False, only_convex_hull=True):
         if use_precalc:
             try:

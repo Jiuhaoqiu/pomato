@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>The Model &mdash; PoMaTo  documentation</title>
+  <title>Model and Theory &mdash; POMATO 0.1.1 documentation</title>
   
 
   
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Quick Start Guide" href="refquickstart.html" /> 
+    <link rel="prev" title="The Market Tool Object" href="refmato.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -48,7 +48,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> PoMaTo
+            <a href="index.html" class="icon icon-home"> POMATO
           
 
           
@@ -56,6 +56,10 @@
 
           
             
+            
+              <div class="version">
+                0.1
+              </div>
             
           
 
@@ -80,7 +84,14 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="refquickstart.html">Quick Start Guide</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">The Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="refmato.html">The Market Tool Object</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Model and Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#power-flow">Power Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#n-1-outage-calculation">N-1 Outage Calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phase-shifting-transformers">Phase Shifting Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zonal-ptdf-and-gsk">Zonal PTDF and GSK</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -95,7 +106,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">PoMaTo</a>
+          <a href="index.html">POMATO</a>
         
       </nav>
 
@@ -126,7 +137,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>The Model</li>
+      <li>Model and Theory</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -145,13 +156,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="the-model">
-<h1>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h1>
-<p>This chapter provides an overview on the model formulations used in pomatos optimization kernel.</p>
-<div class="math" id="equation-enerbal">
-<span class="eqno">(1)<a class="headerlink" href="#equation-enerbal" title="Permalink to this equation">¶</a></span>\[\begin{split}\sum_{{n}_{z}} d^{el}_{n,t} &amp;= \sum_{{co}_{z}} G_{co,t} - \sum_{{es}_{z}} D^{es}_{es,t} - \sum_{{ph}_{z}} D^{ph}_{ph,t} - \sum_{{d}_{z}} D^{d}_{d,t} \\
-&amp;+ \sum_{zz} (EX_{zz,z,t} - EX_{z,zz,t}) \quad \forall t \in \text{T}, \quad z \in \text{Z}\end{split}\]</div>
-<p>where <span class="math">\(z\)</span> is the index of zones in equation <a class="reference internal" href="#equation-enerbal">(1)</a>.</p>
+  <div class="section" id="model-and-theory">
+<h1>Model and Theory<a class="headerlink" href="#model-and-theory" title="Permalink to this headline">¶</a></h1>
+<p>Let’s take a look at the basic modeling concepts on which Pomato is build.</p>
+<div class="section" id="power-flow">
+<h2>Power Flow<a class="headerlink" href="#power-flow" title="Permalink to this headline">¶</a></h2>
+<p>Pomato uses the established DC load flow (DCLF) approximation for linear power flow equations in transmission systems. DCLF leverages the fact, that transmission systems usually have negligible active power losses and nodal voltage levels close unity. This allows to create a matrix of <em>Power Transfer Distribution Factors</em> (PTDFs) that map the net-injection at each bus to a flow on each line.</p>
+<div class="math">
+\[PTDF = (B_d A)(A' B A)^{-1}\]</div>
+<p>where <span class="math">\(A\)</span> is the <span class="math">\(l \times n\)</span> incidence matrix of the network with <span class="math">\(a_{(ij)} = 1\)</span> if line <span class="math">\(i\)</span> starts at bus <span class="math">\(j\)</span> and <span class="math">\(a_{(ij)} = -1\)</span> if line <span class="math">\(i\)</span> ends at bus <span class="math">\(j\)</span>, and <span class="math">\(B_d\)</span> is the <span class="math">\(l \times l\)</span>-diagonal matrix with the line susceptances on the diagonal. Because the physical interpretation of the power flow through the lines results from voltage angle <em>differences</em> between the nodes, the voltage angle at one bus has to be fixed (so called <em>slack bus</em>). Only then the matrix inversion to create the PTDF matrix is possible.</p>
+<p>The vector of flows on each line based on the vector of net-injections at each matrix is then given by:</p>
+<div class="math">
+\[Flow = PTDF \cdot Inj\]</div>
+</div>
+<div class="section" id="n-1-outage-calculation">
+<h2>N-1 Outage Calculation<a class="headerlink" href="#n-1-outage-calculation" title="Permalink to this headline">¶</a></h2>
+<p>Line contingencies can be calculated via a <em>Line Outage Distribution Factor</em> (LODF) matrix that provides insights on how the outage of one line (:math: <cite>o</cite>) affects the flow on all other lines (:math: <cite>l</cite>) in the network (cf.: <a class="reference internal" href="#gao2009" id="id1">[GAO2009]</a>).</p>
+<div class="math">
+\[\begin{split}LODF_{l,o} = \begin{cases} -1 &amp;\text{if } l = o \\ \frac{(A_{(o,*)} \cdot PTDF_{(l,*)})}{(1 - A_{(o,*)} \cdot PTDF_{(o,*)})} &amp;\text{else} \end{cases}\end{split}\]</div>
+<table class="docutils citation" frame="void" id="gao2009" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[GAO2009]</a></td><td>Guo, Jiachun, et al. “Direct calculation of line outage distribution factors.” IEEE Transactions on Power Systems 24.3 (2009): 1633-1634.</td></tr>
+</tbody>
+</table>
+<p>Based on the LODF matrix we create :math: <cite>l</cite> PTDF matrices for all possible line contingencies in the system.</p>
+</div>
+<div class="section" id="phase-shifting-transformers">
+<h2>Phase Shifting Transformers<a class="headerlink" href="#phase-shifting-transformers" title="Permalink to this headline">¶</a></h2>
+<p>A phase shifting transformer (PST) actively influences the power flow on a line by manipulating the voltage angle and thereby making a line more or less susceptible for power flow. PSTs change the voltage angle by :math: <cite>α_l</cite> for a line :math: <cite>l</cite> between nodes :math: <cite>i</cite> and :math: <cite>j</cite>.</p>
+<p>We can derive the <em>Phase Shift Distribution Factor</em> PSDF matrix as:</p>
+<div class="math">
+\[PSDF = B_d - PTDF (B_d A)'\]</div>
+<p>which computes the change of flows on each line per change of one unit voltage angle (radian) on each line. So when a line is systematically overloaded, a phase shift can be employed, to systematically make a line less susceptible to flows (if PST is available). The PTDF matrix can then be updated as:</p>
+<div class="math">
+\[PTDF + PSDF \cdot \alpha \cdot PTDF\]</div>
+</div>
+<div class="section" id="zonal-ptdf-and-gsk">
+<h2>Zonal PTDF and GSK<a class="headerlink" href="#zonal-ptdf-and-gsk" title="Permalink to this headline">¶</a></h2>
+<p>While a nodal representation is useful, in reality usually zones/countries are usually the locational reference rather than individual grid nodes. It is assumed that the injection of a node is divided across all nodes with that zone in a specific ratio, the Generation Shift Key (GSK). Using the GSK, a complex network can be abstracted into a smaller, less complex grid. The line specific load is not lost, based on the overall injection in a zone/country, the nodal injection can be easily calculated with the GSK and individual line loadings and the corresponding contingency analysis is still possible. In other words, the zonal PTDF represents a zone to line sensitivity, where the zonal injection consists of all nodal injections.</p>
+</div>
 </div>
 
 
@@ -163,7 +207,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="refquickstart.html" class="btn btn-neutral" title="Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="refmato.html" class="btn btn-neutral" title="The Market Tool Object" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -194,7 +238,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'',
+            VERSION:'0.1.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
