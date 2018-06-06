@@ -73,7 +73,7 @@ class JuliaInterface(object):
 
         t_start = datetime.datetime.now()
         self.logger.info("Start-Time: " + t_start.strftime("%H:%M:%S"))
-        with open(self.wdir.joinpath('julia.log'), 'w') as log:
+        with open(self.wdir.joinpath("logs").joinpath('julia.log'), 'w') as log:
             # shell=false needed for mac (and for Unix in general I guess)
             with subprocess.Popen(args, shell=False, stdout=subprocess.PIPE) as programm:
                 for line in programm.stdout:
@@ -89,7 +89,7 @@ class JuliaInterface(object):
             _, stderr = programm.communicate()
             self.logger.error(stderr.decode())
             ## Write Log file
-            with open(self.wdir.joinpath('julia.log'), 'a') as log:
+            with open(self.wdir.joinpath("logs").joinpath('julia.log'), 'a') as log:
                 log.write(stderr.decode())
             self.logger.info("julia.log saved!")\
 

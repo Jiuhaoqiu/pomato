@@ -7,7 +7,11 @@ import numpy as np
 import pandas as pd
 from scipy.spatial import ConvexHull
 from sklearn.decomposition import PCA
+from pathlib import Path
+import shutil
 #import gams_cbco_reduction as cbco_reduction
+
+from pomato.resources import JULIA_PATH
 
 class CBCOModule(object):
     """ Class to do all calculations in connection with cbco calculation"""
@@ -16,6 +20,7 @@ class CBCOModule(object):
         self.logger = logging.getLogger('Log.MarketModel.CBCOModule')
 
         self.wdir = wdir
+        self.jdir = Path(JULIA_PATH)
         self.nodes = nodes
         self.lines = lines
         self.A = np.array(A)
@@ -48,7 +53,7 @@ class CBCOModule(object):
         if use_precalc:
             try:
                 self.logger.info("Using cbco indices from pre-calc")
-                precalc_cbco = np.genfromtxt(self.wdir.joinpath("julia/cbco_data/cbco.csv"), delimiter=',')
+                precalc_cbco = np.genfromtxt(self.jdir.joinpath("cbco_data/cbco.csv"), delimiter=',')
                 precalc_cbco = self.cbco_index_positive_to_full_Ab(precalc_cbco)
                 self.cbco_index = np.array(precalc_cbco, dtype=np.int8)
                 self.logger.info("Number of CBCOs from pre-calc: " + str(len(self.cbco_index)))
@@ -77,24 +82,27 @@ class CBCOModule(object):
 
     def create_folders(self, wdir):
         """ create folders for julia cbco_analysis"""
-        if not wdir.joinpath("julia").is_dir():
-            wdir.joinpath("julia").mkdir()
-        if not wdir.joinpath("julia/cbco_data").is_dir():
-            wdir.joinpath("julia/cbco_data").mkdir()
+        folders = [ self.jdir.joinpath("cbco_data"),
+                ]
+
+        for folder in folders:
+            if folder.is_dir():
+                shutil.rmtree(folder)
+            folder.mkdir()
 
     def julia_cbco_interface(self, A, b, cbco_index):
         ## save A,b to csv
         ## save cbco_index for starting set A', and b' as csv
-        np.savetxt(self.wdir.joinpath("julia/cbco_data/A.csv"), np.asarray(A), delimiter=",")
-        np.savetxt(self.wdir.joinpath("julia/cbco_data/b.csv"), np.asarray(b), delimiter=",")
+        np.savetxt(self.jdir.joinpath("cbco_data").joinpath("A.csv"), np.asarray(A), delimiter=",")
+        np.savetxt(self.jdir.joinpath("cbco_data").joinpath("b.csv"), np.asarray(b), delimiter=",")
         ## fmt='%i' is needed to save as integer
-        np.savetxt(self.wdir.joinpath("julia/cbco_data/cbco_index.csv"), cbco_index.astype(int),
+        np.savetxt(self.jdir.joinpath("cbco_data").joinpath("cbco_index.csv"), cbco_index.astype(int),
                    fmt='%i', delimiter=",")
 
-        args = ["julia", str(self.wdir.joinpath("julia/cbco.jl")), str(self.wdir.joinpath("julia"))]
+        args = ["julia", str(self.jdir.joinpath("cbco.jl")), str(self.jdir)]
         t_start = datetime.datetime.now()
         self.logger.info("Start-Time: " + t_start.strftime("%H:%M:%S"))
-        with open(self.wdir.joinpath('cbco_reduction.log'), 'w') as log:
+        with open(self.wdir.joinpath("logs").joinpath('cbco_reduction.log'), 'w') as log:
             # shell=false needed for mac (and for Unix in general I guess)
             with subprocess.Popen(args, shell=False, stdout=subprocess.PIPE) as programm:
                 for line in programm.stdout:
@@ -102,7 +110,7 @@ class CBCOModule(object):
                     self.logger.info(line.decode().strip())
 
         if programm.returncode == 0:
-            tmp_cbco = np.genfromtxt(self.wdir.joinpath("julia/cbco_data/cbco.csv"), delimiter=',')
+            tmp_cbco = np.genfromtxt(self.jdir.joinpath("/cbco_data/cbco.csv"), delimiter=',')
 #            tmp_cbco = self.add_negative_constraints(tmp_cbco)
             return np.array(tmp_cbco, dtype=np.int8)
         else:

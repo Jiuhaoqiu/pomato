@@ -14,14 +14,15 @@ from pomato.julia_interface import JuliaInterface
 import pomato.bokeh_plot_interface as bokeh
 
 
-
 def _logging_setup(wdir):
     # Logging setup
     logger = logging.getLogger('Log.MarketModel')
     logger.setLevel(logging.INFO)
     if len(logger.handlers) < 2:
         # create file handler which logs even debug messages
-        file_handler = logging.FileHandler(wdir.joinpath('market_tool.log'))
+        if not wdir.joinpath("logs").is_dir():
+            wdir.joinpath("logs").mkdir()
+        file_handler = logging.FileHandler(wdir.joinpath("logs").joinpath('market_tool.log'))
         file_handler.setLevel(logging.DEBUG)
         # create console handler with a higher log level
         console_handler = logging.StreamHandler()
