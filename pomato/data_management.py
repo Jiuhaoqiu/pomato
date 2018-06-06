@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import scipy.io as sio
 
-from . import MPCOLNAMES
+from pomato.resources import MPCOLNAMES
 
 pd.options.mode.chained_assignment = None  # default='warn'
 

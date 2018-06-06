@@ -14,6 +14,10 @@ import subprocess
 import json
 import datetime
 import pandas as pd
+from pathlib import Path
+
+from pomato.resources import JULIA_PATH
+
 
 class JuliaInterface(object):
     """ Class to interface the Julia model with the python Market and Grid Model"""
@@ -22,7 +26,7 @@ class JuliaInterface(object):
         self.status = 'empty'
         self.logger = logging.getLogger('Log.MarketModel.JuliaInterface')
         self.wdir = wdir
-        self.jdir = wdir.joinpath("julia")
+        self.jdir = Path(JULIA_PATH)
         self.create_folders(self.wdir)
 
         self.opt_setup = opt_setup

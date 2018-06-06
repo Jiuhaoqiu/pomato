@@ -4,8 +4,10 @@ import pandas as pd
 import subprocess
 from pathlib import Path
 
+import pkg_resources
 
-from . import MPCASES
+
+from pomato.resources import MPCASES, MPCASE_PATH
 from pomato.data_management import DataManagement
 from pomato.grid_model import GridModel
 from pomato.julia_interface import JuliaInterface
@@ -77,9 +79,12 @@ class MarketTool(object):
     def load_matpower_case(self, casename, autobuild_gridmodel=False):
         case = Path(casename)
         if case.is_file():
-            self.data.read_matpower_case(case)
+            try:
+                self.data.read_matpower_case(case)
+            except:
+                self.looger.info("Invalid MPcasefile")
         elif casename in MPCASES:
-            case = Path('mp_casedata/{}.mat'.format(casename))
+            case = Path('MPCASE_PATH/{}.mat'.format(casename))
             self.data.read_matpower_case(case)
         else:
             self.logger.exception("MP Case {} can not be found!".format(casename))

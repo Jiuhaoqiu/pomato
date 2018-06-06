@@ -1,11 +1,11 @@
 /_DEV
 *.log
 *DEV.*
-/julia/results
-/julia/data
-/julia/cbco_data
 /bokeh
 /pomato.*
 /dist
 /build
 */__pycache__
+pomato/julia-files/data
+pomato/julia-files/results
+pomato/julia-files/cbco_data

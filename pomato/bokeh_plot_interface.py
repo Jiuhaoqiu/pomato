@@ -139,15 +139,23 @@ class BokehPlot(object):
     def output_reader(self, proc):
         """helper function to print stdout to console"""
         for line in iter(proc.stdout.readline, b''):
-            self.logger.info('got line: {0}'.format(line.decode('utf-8')).strip())
-        
+            bokeh_output = '{0}'.format(line.decode('utf-8')).strip()
+            self.logger.info('bokeh: ' + bokeh_output)
+            
+            # listen to output and stop server if websocket is closed
+            kill_keywords = ['code=1001', 'WebSocket connection closed']
+            if any(k in bokeh_output for k in kill_keywords):
+                self.stop_server()
+
     def start_server(self):
         """Run the Bokeh server via command Line"""
+        self.logger.info("Starting Bokeh Server - Close Browser Window to Terminate")
         args_list = ["bokeh", "serve", "--show", str(self.wdir.joinpath("pomato/bokeh_plot.py")), "--args",
                      str(self.bokeh_dir)]
         self.bokeh_server = subprocess.Popen(args_list,
                                              stdout=subprocess.PIPE,
-                                             stderr=subprocess.STDOUT)
+                                             stderr=subprocess.STDOUT,
+                                             shell=False)
 
         self.bokeh_thread = threading.Thread(target=self.output_reader,
                                              args=(self.bokeh_server,))
@@ -156,4 +164,4 @@ class BokehPlot(object):
     def stop_server(self):
         """ stop bokeh server"""
         self.bokeh_server.terminate()
-        self.bokeh_thread.join()
+        # self.bokeh_thread.join()
