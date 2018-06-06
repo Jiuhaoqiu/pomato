@@ -15,6 +15,7 @@ import json
 import datetime
 import pandas as pd
 from pathlib import Path
+import shutil
 
 from pomato.resources import JULIA_PATH
 
@@ -52,17 +53,19 @@ class JuliaInterface(object):
 
         self.results = {}
 
-
     def create_folders(self, wdir):
-        """ create folders for bokeh interface"""
-        if not wdir.joinpath("julia").is_dir():
-            wdir.joinpath("julia").mkdir()
-        if not self.jdir.joinpath("data").is_dir():
-            self.jdir.joinpath("data").mkdir()
-        if not self.jdir.joinpath("results").is_dir():
-            self.jdir.joinpath("results").mkdir()
-        if not self.jdir.joinpath("data").joinpath("json").is_dir():
-            self.jdir.joinpath("data").joinpath("json").mkdir()
+        """ create or empty folders for bokeh interface"""
+        
+        folders = [ self.jdir.joinpath("data"),
+                    self.jdir.joinpath("results"),    
+                    self.jdir.joinpath("data").joinpath("json")
+                ]
+
+        for folder in folders:
+            if folder.is_dir():
+                shutil.rmtree(folder)
+            folder.mkdir()
+
 
     def run(self):
         """Run the julia Programm via command Line"""
@@ -196,6 +199,7 @@ class JuliaInterface(object):
 
     def data_to_csv(self):
         """Export Data to csv files file in the jdir + \\data"""
+        # Some legacy json also needs to be written here
         csv_path = self.jdir.joinpath('data')
         self.plants.to_csv(str(csv_path.joinpath('plants.csv')), index_label='index')
         self.nodes.to_csv(str(csv_path.joinpath('nodes.csv')), index_label='index')
