@@ -32,7 +32,7 @@ Requirements
 ------------
 
 Pomato is (until now) a console tool mainly written in python and therefore requires *Python 3*. 
-Its optimization kernel uses Julia. Julia needs to be installed and added to your system environment (it needs to be callable via console) manually. Pomato requires *Julia 0.6.2* or higher. Download the Julia Command line version from the [Julia-Website]{https://julialang.org/}.
+Its optimization kernel uses Julia. Julia needs to be installed and added to your system environment (it needs to be callable via console) manually. Pomato requires *Julia 0.6.2* or higher. Download the Julia Command line version from the [Julia-Website](https://julialang.org/).
 
 
 Installation
@@ -44,7 +44,7 @@ After you have installed Python and Julia in the correct versions (see above), u
 python setup.py install
 ```
 
-For a quick start to Pomato check out the [DOCS]{http://pomato.readthedocs.io/en/latest/} and the `run_pomato_simple_example.py` script. *Note*: In the first run, Julia will install all the necessary packages. This might take a couple of minutes depending on your machine and your internet connection. 
+For a quick start to Pomato check out the [DOCS](http://pomato.readthedocs.io/en/latest/) and the `run_pomato_simple_example.py` script. *Note*: In the first run, Julia will install all the necessary packages. This might take a couple of minutes depending on your machine and your internet connection. 
 
 
 
