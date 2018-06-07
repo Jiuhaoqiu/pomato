@@ -13,12 +13,6 @@
 # Output: Optimization results saved in /julia/results/
 # -------------------------------------------------------------------------------------------------
 
-
-# Invoke Required Modules
-using DataFrames, CSV, JSON, DataStructures
-using JuMP, Clp
-
-
 # To use file both in POMATO and as script
 if length(ARGS) > 0
     WDIR = ARGS[1]
@@ -27,10 +21,50 @@ else
     WDIR = pwd()
 end
 
-# For prototyping Robert
-# WDIR = "C:/Users/Robert/Google Drive/My_Documents/_Projects/Market Tool/market_tool_julia_extension/julia"
-# WDIR = "/Users/Balu/IEEEGoogleDrive/My_Documents/_Projects/Market Tool/market_tool_julia_extension/julia"
-# model_type = "dispatch"
+
+# Invoke Required packages (todo: make this a macro)
+try
+    using DataFrames
+catch
+    Pkg.add("DataFrames")
+    using DataFrames
+end
+
+try
+    using CSV
+catch
+    Pkg.add("CSV")
+    using CSV
+end
+
+try 
+    using JSON
+catch
+    Pkg.add("JSON")
+    using JSON
+end
+
+try 
+    using DataStructures
+catch
+    Pkg.add("DataStructures")
+    using DataStructures
+end
+
+try 
+    using JuMP
+catch
+    Pkg.add("JuMP")
+    using JuMP
+end
+
+try 
+    using Clp
+catch
+    Pkg.add("Clp")
+    using Clp
+end
+
 
 include("src/tools.jl")
 include("src/typedefinitions.jl")

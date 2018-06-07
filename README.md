@@ -5,7 +5,8 @@ POMATO - Power Market Tool
 [![Coverage Status](https://coveralls.io/repos/github/robert-mieth/pomato/badge.svg?branch=master)](https://coveralls.io/github/robert-mieth/pomato?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/pomato/badge/?version=latest)](http://pomato.readthedocs.io/en/latest/?badge=latest)
 
-
+Overview
+--------
 
 The idea of Pomato is to provide an easy to use tool that inhibits all the power system engineering that is necessary for comprehensive analyses of the modern power market. It is more flexible and powerful than studies in Excel but sets aside the unnecessary detail of engineering software like Integral or PowerFactory. 
 
@@ -13,7 +14,7 @@ Pomato currently includes:
 
 * Data
     * Supports Excel Data
-    * Support MatPowerCase Data
+    * Supports MatPowerCase Data
 
 * Grid
     * Fast network representation with recalculated network constraints
