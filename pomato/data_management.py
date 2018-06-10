@@ -99,6 +99,24 @@ class DataManagement(object):
                 'Qd': bus_df['Qd'],
                 'baseKV': bus_df['baseKV']
                 }
+
+        # find and set slack bus
+        if 3.0 in bus_df['b_type']:
+            slackbus_idx = bus_df['b_type'][bus_df['b_type'] == 3.0].index[0]
+            slackbus = bus_df['bus_i'][slackbus_idx]
+            self.logger.info("Slackbus read as {:.0f}".format(slackbus))
+        else:
+            slackbus_idx = 0
+            slackbus = bus_df['bus_i'][0]
+            self.logger.info("Slackbus set to default {}".format(slackbus))
+
+        slack = np.zeros(len(bus_df['bus_i']))
+        slack[slackbus_idx] = 1
+        mpc_buses['slack'] = slack
+        mpc_buses['slack'] = mpc_buses['slack'].astype(bool)
+        mpc_buses['net_injection'] = np.zeros(len(mpc_buses['idx']))
+
+        # add verbose names if available
         if busname.any():
             b_name = []
             for b in busname:
@@ -112,15 +130,17 @@ class DataManagement(object):
                 'node_i': branch_df['fbus'],
                 'node_j': branch_df['tbus'],
                 'maxflow': branch_df['rateA'],
-                'b': branch_df['b'],
+                'b_other': branch_df['b'],
                 'r': branch_df['r'],
                 'x': branch_df['x']
                 }
         mpc_lines = self._mpc_data_pu_to_real(mpc_lines, mpc_buses['baseKV'][0], baseMVA[0][0])
+        
+        contingency = np.ones(len(mpc_lines['idx']))
+        mpc_lines['contingency'] = contingency.astype(bool)
 
         ng = len(gen_df.index)
         genidx = ['g{}'.format(i) for i in range(ng)]
-        print(type(gencost_df['x2']))
         mpc_generators = {
                     'idx': genidx, 
                     'g_max': gen_df['Pmax'],
@@ -133,13 +153,11 @@ class DataManagement(object):
         if len(gencost_df.index) == 2*ng:
             mpc_generators['mc_Q'] = gencost_df['x2'][list(range(ng,2*ng))].tolist
 
-        self.lines = pd.DataFrame(mpc_lines)
-        self.lines.set_index('idx')
-        self.nodes = pd.DataFrame(mpc_buses)
-        self.nodes.set_index('idx')
-        self.plants = pd.DataFrame(mpc_generators)
-        self.plants.set_index('idx')
+        self.lines = pd.DataFrame(mpc_lines).set_index('idx')
+        self.nodes = pd.DataFrame(mpc_buses).set_index('idx')
+        self.plants = pd.DataFrame(mpc_generators).set_index('idx')
 
+        self.ntc = []
         self.is_empty = False
         self.source = 'mpc_case'
 
@@ -150,7 +168,11 @@ class DataManagement(object):
         z_base = np.power(v_base,2)/s_base
         lines['r'] = np.multiply(lines['r'], z_base)
         lines['x'] = np.multiply(lines['x'], z_base)
-        lines['b'] = np.divide(lines['b'], z_base)
+        lines['b_other'] = np.divide(lines['b_other'], z_base)
+        lines['b'] = np.divide(1, lines['x'])
+        # Some numerical correction
+        # lines['b'] = np.multiply(lines['b'], 1)
+        lines['maxflow'] = np.ones(len(lines['idx']))*10
         return lines
 
     def _clear_all_data(self):

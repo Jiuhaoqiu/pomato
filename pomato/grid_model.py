@@ -70,6 +70,9 @@ class GridModel(object):
             tmp = np.around(tmp, decimals=3)
             if 1 in tmp:
                 radial_lines.append(line)
+            elif self.lines.get_value(line, 'b') == 0:
+                radial_lines.append(line)
+        
 
         tmp = self.lines[((self.lines.node_i.isin(radial_nodes))| \
                           (self.lines.node_j.isin(radial_nodes)))& \
@@ -187,7 +190,7 @@ class GridModel(object):
             from pathlib import Path
             A,b = self.contingency_Ab("nodal", self.n_1_ptdf)
             cbco = CBCOModule(Path.cwd(), self.nodes, self.lines, A, b)
-            info, cbco = cbco.main(use_precalc=False, only_convex_hull=False)
+            info, cbco = cbco.main(use_precalc=False, only_convex_hull=True)
             grid_rep["info"] = info
             grid_rep["cbco"] = cbco
         return grid_rep

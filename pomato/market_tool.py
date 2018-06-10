@@ -79,14 +79,15 @@ class MarketTool(object):
 
     def load_matpower_case(self, casename, autobuild_gridmodel=False):
         case = Path(casename)
+        mpcase_path = Path(MPCASE_PATH)
         if case.is_file():
             try:
                 self.data.read_matpower_case(case)
             except:
                 self.looger.info("Invalid MPcasefile")
         elif casename in MPCASES:
-            case = Path('MPCASE_PATH/{}.mat'.format(casename))
-            self.data.read_matpower_case(case)
+            case = mpcase_path.joinpath(casename+'.mat')
+            self.data.read_matpower_case(str(case))
         else:
             self.logger.exception("MP Case {} can not be found!".format(casename))
             return

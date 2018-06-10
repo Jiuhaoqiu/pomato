@@ -13,6 +13,7 @@ import threading
 import datetime as dt
 import pandas as pd
 
+
 class BokehPlot(object):
     """interface market data and bokeh plot, init all data then run the server from cmd"""
     def __init__(self, wdir, data):
